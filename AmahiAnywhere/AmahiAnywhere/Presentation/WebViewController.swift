@@ -32,11 +32,11 @@ class WebViewController : UIViewController {
         rootView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[webView]-0-|",
                                                                            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                                                                            metrics: nil,
-                                                                           views: ["webView": webView]))
+                                                                           views: ["webView": webView as Any]))
         rootView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[webView]-0-|",
                                                                            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                                                                            metrics: nil,
-                                                                           views: ["webView": webView]))
+                                                                           views: ["webView": webView as Any]))
         
         let webViewKeyPathsToObserve = ["title", "estimatedProgress"]
         for keyPath in webViewKeyPathsToObserve {
@@ -52,7 +52,7 @@ class WebViewController : UIViewController {
     
     @objc func userClickShare() {
         
-        let linkToShare : [Any] = [url]
+        let linkToShare : [Any] = [url as Any]
         
         let activityController = UIActivityViewController(activityItems: linkToShare, applicationActivities: nil)
         if let popoverController = activityController.popoverPresentationController {

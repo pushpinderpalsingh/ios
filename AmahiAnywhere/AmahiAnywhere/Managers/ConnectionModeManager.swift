@@ -30,9 +30,9 @@ class ConnectionModeManager {
     
     func setupReachability(_ hostName: String?) {
         if let hostName = hostName {
-            reachability = Reachability(hostname: hostName)
+           try!  reachability = Reachability(hostname: hostName)
         } else {
-            reachability = Reachability()
+          try!  reachability = Reachability()
         }
         
         NotificationCenter.default.addObserver(
@@ -67,8 +67,8 @@ class ConnectionModeManager {
         
         AmahiLogger.log("testLocalAvailability was called")
         
-        if lastCheckedAt != nil && fabs(Float(lastCheckedAt!.timeIntervalSinceNow)) <= Float(MinimumConnectionCheckPeriod)  {
-                 AmahiLogger.log("local checking ratelimit exceeded. last cheked %.1fs ago", fabs(Float((lastCheckedAt?.timeIntervalSinceNow)!)))
+        if lastCheckedAt != nil && abs(Float(lastCheckedAt!.timeIntervalSinceNow)) <= Float(MinimumConnectionCheckPeriod)  {
+            AmahiLogger.log("local checking ratelimit exceeded. last cheked %.1fs ago", abs(Float((lastCheckedAt?.timeIntervalSinceNow)!)))
             return
         }
         
@@ -136,7 +136,7 @@ class ConnectionModeManager {
         let reachability = note.object as! Reachability
         reset()
 
-        if reachability.connection != .none {
+        if reachability.connection != .unavailable {
             testLocalAvailability()
         }
     }
